@@ -31,12 +31,12 @@ public class BankingService implements IBankingService{
     public BankingRecord newRecord(SaveOrWithdrawMoneyDTO saveOrWithdrawMoneyDTO) throws Exception {
         Customer customer = customerRepository.findById(saveOrWithdrawMoneyDTO.getCustomer_id()).orElseThrow(() -> new BadRequestException("User with given id doesn't exist"));
         if(Objects.equals(saveOrWithdrawMoneyDTO.getType(), EBankingRecordType.SAVING.toString())){
-            System.out.println("Saving...");
+            System.out.println("Please wait, saving...");
             customer.setBalance(customer.getBalance() + saveOrWithdrawMoneyDTO.getAmount());
         }else{
-            System.out.println("Withdrawing...");
+            System.out.println("Please wait, withdrawing...");
             if(customer.getBalance() < saveOrWithdrawMoneyDTO.getAmount()){
-                throw new BadRequestException("Insufficient balance");
+                throw new BadRequestException("Amount you have on your balance are insufficient to withdraw, please check your amount");
             }
             customer.setBalance(customer.getBalance() - saveOrWithdrawMoneyDTO.getAmount());
         }

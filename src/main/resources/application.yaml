@@ -17,7 +17,7 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: hallcoder25@gmail.com
+    username: irizapeace@gmail.com
     password: wiz24kid@
     properties:
       mail:
@@ -25,9 +25,7 @@ spring:
           auth: true
           starttls:
             enable: true
-file:
-  upload:
-    dir : upload
+
 logging:
   level:
     org.springframework.security: DEBUG

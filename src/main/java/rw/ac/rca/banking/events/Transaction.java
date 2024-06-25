@@ -4,10 +4,11 @@ import lombok.Data;
 import org.springframework.context.ApplicationEvent;
 import rw.ac.rca.banking.models.BankingRecord;
 
+//This class is used to create an event that will be triggered when a transaction is made
 @Data
-public class TransactionCompleteEvent extends ApplicationEvent {
+public class Transaction extends ApplicationEvent {
     private final BankingRecord bankingRecord;
-    public TransactionCompleteEvent(Object source, BankingRecord record) {
+    public Transaction(Object source, BankingRecord record) {
         super(source);
         bankingRecord = record;
     }

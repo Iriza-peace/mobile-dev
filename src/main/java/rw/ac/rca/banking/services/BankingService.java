@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import rw.ac.rca.banking.DTOs.SaveOrWithdrawMoneyDTO;
 import rw.ac.rca.banking.Enumerations.EBankingRecordType;
-import rw.ac.rca.banking.events.TransactionCompleteEvent;
+import rw.ac.rca.banking.events.Transaction;
 import rw.ac.rca.banking.mailHandling.EmailHandlerService;
 import rw.ac.rca.banking.models.Account;
 import rw.ac.rca.banking.models.BankingRecord;
@@ -48,7 +48,7 @@ public class BankingService implements IBankingService{
         bankingRecord.setCustomer(customer);
         Account account = accountRepository.findById(saveOrWithdrawMoneyDTO.getAccount_id()).orElseThrow(() -> new BadRequestException("Account doesn't exist"));
         bankingRecord.setAccount(account);
-        eventPublisher.publishEvent(new TransactionCompleteEvent(customer,bankingRecord));
+        eventPublisher.publishEvent(new Transaction(customer,bankingRecord));
         return bankingRepository.save(bankingRecord);
     }
 }

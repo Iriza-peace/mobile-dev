@@ -26,7 +26,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     @GetMapping()
     public String sayHello(){
-        return "Hello world!";
+        return "Hello, this endpoint is for bank management system";
     }
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<User>> createUser(@RequestBody CreateUserDTO userDTO){

@@ -44,27 +44,24 @@ public class CustomerController {
         modelMapper.map(dto,newCustomer);
         newCustomer.setLastUpdateTime(LocalDate.now());
         newCustomer.setBalance(0.0);
-//        Optional<User> existingUser = userService.getUserByEmail(dto.getEmail());
-//        if(existingUser.isPresent()){
-//            throw new UserAlreadyExists("Email already in use");
-//        }
+
         User user = new User(dto.getEmail(),passwordEncoder.encode(dto.getPassword()));
         user.setRoles(Collections.singleton(ERole.CUSTOMER));
         user = userService.createUser(user);
         newCustomer.setProfile(user);
         Account account = new Account();
-        account.setNumber("2500423212" + accountRepository.findAll().size() + 1);
+        account.setNumber("0790172051" + accountRepository.findAll().size() + 1);
         account = accountRepository.save(account);
         Set<Account> accounts = newCustomer.getAccount();
         accounts.add(account);
         newCustomer.setAccount(accounts);
         newCustomer = customerService.createCustomer(newCustomer);
-        return ResponseEntity.ok(new ApiResponse<Customer>("Customer created succesfully", HttpStatus.CREATED,newCustomer));
+        return ResponseEntity.ok(new ApiResponse<Customer>("Successfully a customer is created", HttpStatus.CREATED,newCustomer));
     }
 
     @PostMapping("/transaction")
     public ResponseEntity<?> saveMoney(@RequestBody SaveOrWithdrawMoneyDTO dto) throws Exception {
         BankingRecord record = bankingService.newRecord(dto);
-        return ResponseEntity.ok(new ApiResponse<>("Transaction completed!",HttpStatus.CREATED,record));
+        return ResponseEntity.ok(new ApiResponse<>("Your transaction has 0completed successfully!",HttpStatus.CREATED,record));
     }
 }

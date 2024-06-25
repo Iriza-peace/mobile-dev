@@ -22,7 +22,7 @@ public class TransactionCompleteListener implements ApplicationListener<Transact
         Customer customer = (Customer) event.getSource();
         BankingRecord bankingRecord = event.getBankingRecord();
         String sentMessage = "Dear " + customer.getFirstName() + " " + customer.getLastName() + " Your " + bankingRecord.getType().toString() + " of " + bankingRecord.getAmount() + " RWF on your " + bankingRecord.getAccount().getNumber() + " has been successfully completed!";
-        emailHandlerService.sendMessage(customer.getEmail(), "Transaction Approved!",sentMessage);
+        emailHandlerService.sendMessage(customer.getEmail(), "Transaction Successful!",sentMessage);
         Message message = new Message();
         message.setCustomer(customer);
         message.setMessage(sentMessage);

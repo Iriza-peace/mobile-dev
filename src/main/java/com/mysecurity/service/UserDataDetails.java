@@ -1,4 +1,5 @@
 package com.mysecurity.service;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,9 +16,18 @@ public class UserDataDetails implements UserDetails {
     private String username;
     private String password;
     private List<GrantedAuthority> authorities;
+
+    @Getter
+    private String account;
+
+    @Getter
+    private double balance;
     public UserDataDetails(UserData userData) {
         username=userData.getEmail();
         password = userData.getPassword();
+        account = userData.getAccount();
+        balance = userData.getBalance();
+
         authorities = Arrays.stream(userData.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
@@ -34,6 +44,7 @@ public class UserDataDetails implements UserDetails {
     public String getUsername() {
         return username;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

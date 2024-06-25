@@ -36,7 +36,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/users/welcome", "/users/addNewUser", "/users/generateToken","/academics/**").permitAll())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/users/user/**").authenticated())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/users/admin/**").authenticated())
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/laptops/**").hasAuthority("ROLE_ADMIN"))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

@@ -29,7 +29,6 @@ private static final String[] WHITELIST = {
         "/swagger-ui.html",
         "/v3/api-docs/**",
         "/swagger.json",
-        "/api/v1/product/**",
         "/api/v1/auth/**",
         "/api/v1/user/**",
         "/api/v1/customer/**",

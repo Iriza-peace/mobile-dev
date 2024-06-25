@@ -1,5 +1,4 @@
 package rw.ac.rca.banking.services;
-
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.context.ApplicationEventPublisher;
@@ -14,7 +13,6 @@ import rw.ac.rca.banking.models.Customer;
 import rw.ac.rca.banking.repositories.IAccountRepository;
 import rw.ac.rca.banking.repositories.IBankingRepository;
 import rw.ac.rca.banking.repositories.ICustomerRepository;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 

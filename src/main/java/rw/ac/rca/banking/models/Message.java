@@ -16,7 +16,7 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID message_id;
-    @OneToOne
+    @ManyToOne
     private Customer customer;
     private String message;
     private LocalDateTime dateTime;

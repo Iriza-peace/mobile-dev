@@ -16,11 +16,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class BankingRecord {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ManyToOne
-    private Customer customer;
     private double amount;
     @ManyToOne
     private Account account;

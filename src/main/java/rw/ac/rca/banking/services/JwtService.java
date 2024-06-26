@@ -4,8 +4,9 @@ import io.jsonwebtoken.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import rw.ac.rca.banking.security.UserPrincipal;
+import rw.ac.rca.banking.security.CustomerPrincipal;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class JwtService {
     private int jwtExpirationInMs = 86400000;
 
 
-    public String generateToken(UserPrincipal userPrincipal) {
+    public String generateToken(CustomerPrincipal userPrincipal) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
         // Extract roles from userPrincipal and convert them to a list of role names
@@ -30,13 +31,16 @@ public class JwtService {
         System.out.println(userPrincipal.getId());
 
         try {
+            Calendar calendar=Calendar.getInstance();
+            calendar.add(Calendar.DATE,1);
+
             String jwt =  Jwts.builder()
                     .setId(userPrincipal.getId() + "")
                     .setSubject(userPrincipal.getUsername() + "")
                     .claim("user", userPrincipal)
                     .claim("roles", roles) // Include roles in the claim
                     .setIssuedAt(new Date(System.currentTimeMillis()))
-                    .setExpiration(expiryDate)
+                    .setExpiration(calendar.getTime())
                     .signWith(SignatureAlgorithm.HS512, jwtSecret)
                     .compact();
             return jwt;

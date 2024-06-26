@@ -36,4 +36,8 @@ public class Customer{
     public UUID getCustomer_id() {
         return customer_id;
     }
+
+    public String getPassword() {
+        return profile.getPassword();
+    }
 }

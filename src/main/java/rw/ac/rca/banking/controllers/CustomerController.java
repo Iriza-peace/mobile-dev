@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rw.ac.rca.banking.DTOs.CreateCustomerDTO;
 import rw.ac.rca.banking.DTOs.SaveOrWithdrawMoneyDTO;
+import rw.ac.rca.banking.DTOs.TransferDTO;
 import rw.ac.rca.banking.Enumerations.ERole;
 import rw.ac.rca.banking.Utils.ApiResponse;
 import rw.ac.rca.banking.models.Account;
@@ -21,6 +22,7 @@ import rw.ac.rca.banking.repositories.IUserRepository;
 import rw.ac.rca.banking.services.IBankingService;
 import rw.ac.rca.banking.services.ICustomerService;
 import rw.ac.rca.banking.services.IUserService;
+
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -61,6 +63,12 @@ public class CustomerController {
     @PostMapping("/transaction")
     public ResponseEntity<?> saveMoney(@RequestBody SaveOrWithdrawMoneyDTO dto) throws Exception {
         BankingRecord record = bankingService.newRecord(dto);
-        return ResponseEntity.ok(new ApiResponse<>("Your transaction has 0completed successfully!",HttpStatus.CREATED,record));
+        return ResponseEntity.ok(new ApiResponse<>("Your transaction has completed successfully!",HttpStatus.CREATED,record));
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<?> transferMoney(@RequestBody TransferDTO dto) throws Exception {
+        BankingRecord record = bankingService.transferMoney(dto);
+        return ResponseEntity.ok(new ApiResponse<>("Your transaction has completed successfully!",HttpStatus.CREATED,record));
     }
 }
